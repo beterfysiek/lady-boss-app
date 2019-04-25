@@ -1,0 +1,18 @@
+
+
+<ion-content padding>
+    <h2>Signals</h2>
+    <ion-list no-margin no-padding lines="none">
+      <ion-item margin-bottom *ngFor="let s of signals | async">
+        <ion-label>
+        <span slot="end" class="date">{{s.date | date: 'short'}}</span>
+        <p>EURO/USD SELL</p>
+        <p>TP {{s.TP}}</p>
+        <p>SL {{s.SL}}</p>
+        <p slot="end" class="pos">Open {{s.open}} position</p>
+        </ion-label>
+      </ion-item>
+    
+    </ion-list>
+    <p text-center>Load More</p>
+  </ion-content>

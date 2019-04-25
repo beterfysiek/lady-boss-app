@@ -1,0 +1,26 @@
+<ion-content padding text-center>
+  <img src="assets/logo/logo.png" margin-top>
+    <ion-input [(ngModel)]="email" type="email" placeholder="Email:"></ion-input>
+    <ion-input [(ngModel)]="pass" type="password" placeholder="Password:"></ion-input>
+  <ion-button color="light" expand="full" (click)="login()">Login</ion-button>
+    <br>
+    <p (click)="newAccount()">Create account</p>
+  <p (click)="forgotPassword()">Forgot password?</p>
+  </ion-content>
+<ion-footer>
+      <ion-toolbar>
+          <ion-buttons slot="start">
+              <span padding
+              class="fu">Follow Us</span>
+            <ion-button fill="clear">
+                <ion-icon name="logo-instagram"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear">
+                <ion-icon name="logo-facebook"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear">
+                <ion-icon name="logo-twitter"></ion-icon>
+            </ion-button>
+          </ion-buttons> 
+        </ion-toolbar>
+  </ion-footer>

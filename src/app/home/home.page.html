@@ -1,0 +1,44 @@
+<ion-content padding>
+  <h2>Dashboard</h2>
+  <ion-list no-padding lines="none">
+    <ion-item no-padding [href]="'/profile'">
+      Profile
+    </ion-item>
+    <ion-item no-padding [href]="'/invoices'">
+      Invoices
+    </ion-item>
+    <ion-item no-padding [href]="'/payments'">
+      Payments
+    </ion-item>
+    <ion-item no-padding [href]="'/signals'">
+      Signals
+    </ion-item>
+    <ion-item no-padding [href]="'/about-us'">
+      About us
+    </ion-item>
+    <ion-item no-padding [href]="'/manuals'">
+      Manuals
+    </ion-item>
+    <ion-item no-padding (click)="logout()">
+      Logout
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <span padding
+     class="fu">Follow Us</span>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+          <ion-icon name="logo-instagram"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+          <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+          <ion-icon name="logo-twitter"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

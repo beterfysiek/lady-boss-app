@@ -1,0 +1,24 @@
+<ion-content padding>
+
+    <h2>Invoices</h2>
+    <ion-list no-margin no-padding lines="none">
+      <ion-item margin-bottom *ngFor="let i of invoices">
+        <ion-label>
+        <span slot="end" class="date">{{i.timestamp | date: 'short'}}</span>
+        <p>Payed at: {{i.payedat | date: 'short' }}</p>
+        <p>Payed untill:  {{i.payeduntill  | date: 'short'}}</p>
+        <p>Amount: {{i.amount}}$</p>
+        </ion-label>
+      </ion-item>
+    
+    </ion-list>
+    <p text-center>Load More</p>
+  </ion-content>
+
+  <ion-footer>
+      <ion-toolbar>
+          <ion-buttons slot="start">
+              <ion-button href="/home" color="light" fill="clear" slot="end">Back</ion-button>
+          </ion-buttons> 
+        </ion-toolbar>
+  </ion-footer>
