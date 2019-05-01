@@ -16,6 +16,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
 import { PayPal } from '@ionic-native/paypal/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { Camera } from '@ionic-native/camera/ngx';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyD8eCLULMR09_jHANlZCvAsDplkvrsn2OY",
@@ -36,7 +39,10 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,
@@ -44,7 +50,8 @@ export const firebaseConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestore,
     PayPal,
-    Firebase
+    Firebase,
+    Camera
   ],
   bootstrap: [AppComponent]
 })

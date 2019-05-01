@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manuals',
@@ -9,7 +10,7 @@ export class ManualsPage implements OnInit {
 
   public manuals: any[];
 
-  constructor() {
+  constructor(private router: Router) { 
     this.manuals = [
       {
         title: 'Currency features'
@@ -22,6 +23,10 @@ export class ManualsPage implements OnInit {
       }
     ]
    }
+
+   nav(to: string) {
+    this.router.navigateByUrl(to);
+  }
 
   ngOnInit() {
   }

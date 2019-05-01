@@ -1,22 +1,19 @@
 <ion-content padding>
   <h2>Dashboard</h2>
   <ion-list no-padding lines="none">
-    <ion-item no-padding [href]="'/profile'">
+    <ion-item no-padding (click)="nav('/profile')">
       Profile
     </ion-item>
-    <ion-item no-padding [href]="'/invoices'">
+    <ion-item no-padding (click)="nav('/invoices')">
       Invoices
     </ion-item>
-    <ion-item no-padding [href]="'/payments'">
-      Payments
-    </ion-item>
-    <ion-item no-padding [href]="'/signals'">
+    <ion-item no-padding (click)="nav('/signals')" [disabled]="!auth.hasSubscription">
       Signals
     </ion-item>
-    <ion-item no-padding [href]="'/about-us'">
+    <ion-item no-padding (click)="nav('/about-us')">
       About us
     </ion-item>
-    <ion-item no-padding [href]="'/manuals'">
+    <ion-item no-padding (click)="nav('/manuals')">
       Manuals
     </ion-item>
     <ion-item no-padding (click)="logout()">

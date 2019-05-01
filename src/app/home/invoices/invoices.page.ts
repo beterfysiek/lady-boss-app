@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoices',
@@ -7,17 +11,14 @@ import { Component } from '@angular/core';
 })
 export class InvoicesPage {
 
-  public invoices: any[];
+  constructor(
+    private afs: AngularFirestore,
+    public auth: AuthService,
+    private router: Router) { }
 
-  constructor() { 
-    this.invoices = [
-      {
-        timestamp: new Date(),
-        payeduntill: new Date(),
-        payedat: new Date(),
-        amount: 5
+    nav(to: string) {
+      this.router.navigateByUrl(to);
     }
-  ]
-  }
+  
 
 }

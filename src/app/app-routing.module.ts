@@ -5,8 +5,7 @@ import { LoginGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'create-account', pathMatch: 'full', canActivate: [LoginGuard] },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
-  { path: 'create-account', loadChildren: './setup/create-account/create-account.module#CreateAccountPageModule' },
-  { path: 'create-account-p2', loadChildren: './setup/create-account-p2/create-account-p2.module#CreateAccountP2PageModule' },
+  { path: 'create-account', loadChildren: './setup/create-account/create-account.module#CreateAccountPageModule', canActivate: [LoginGuard] },
   { path: 'profile', loadChildren: './home/profile/profile.module#ProfilePageModule' },
   { path: 'invoices', loadChildren: './home/invoices/invoices.module#InvoicesPageModule' },
   { path: 'signals', loadChildren: './home/signals/signals.module#SignalsPageModule' },

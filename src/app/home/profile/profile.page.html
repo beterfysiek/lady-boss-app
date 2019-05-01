@@ -1,12 +1,16 @@
 <ion-content padding>
   <div class="imgwrap">
-    <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" margin-top>
+    <ion-avatar *ngIf="show" class="profile" (click)="fileinput1.click()">
+      <img id="img-preview" class="fadeOnInit">
+    </ion-avatar>
+  <input #fileinput1 (change)="uploadFileBrowser($event)" type="file" accept="image/*" style="display: none">
+  <ion-button (click)="(platform.is('cordova')) ? presentActionSheet() : fileinput1.click()" expand="full" color="dark">
+    Upload image
+  </ion-button>
 </div>
+
     <h2>Profile</h2>
     <ion-input placeholder="Username:"></ion-input>
-    <ion-input placeholder="Email:"></ion-input>
-    <ion-input placeholder="Password:"></ion-input>
-    <br>
     <ion-textarea placeholder="Bio:"></ion-textarea>
     <ion-textarea placeholder="From:"></ion-textarea>
   </ion-content>
@@ -14,7 +18,7 @@
   <ion-footer>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-button href="/home" color="light" fill="clear" slot="end">Back</ion-button>
+            <ion-button (click)="nav('/home')" color="light" fill="clear" slot="end">Back</ion-button>
         </ion-buttons> 
       </ion-toolbar>
   </ion-footer>

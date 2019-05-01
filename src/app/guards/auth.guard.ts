@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginGuard implements CanActivate {
  
+  
   constructor(
     private authService: AuthService,
     private router: Router
@@ -15,10 +16,11 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(this.authService.authenticated) return true; //&& this.authService.authState.emailVerified
+    console.log('auth', this.authService.authenticated)
+      if(!this.authService.authenticated) return true; //&& this.authService.authState.emailVerified
 
     console.log('no access');
-    this.router.navigate(['/login'])
+    this.router.navigate(['/home'])
 
     return false;
   }
