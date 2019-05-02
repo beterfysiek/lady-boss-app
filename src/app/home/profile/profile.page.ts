@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage {
 
-  
+
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
   show: boolean;
@@ -32,11 +32,11 @@ export class ProfilePage {
     private ngZone: NgZone,
     private profile: ProfileService,
     private router: Router
-    ) {}
+  ) { }
 
-    nav(to: string) {
-      this.router.navigateByUrl(to);
-    }
+  nav(to: string) {
+    this.router.navigateByUrl(to);
+  }
 
   uploadFileBrowser(event) {
     const file = event.target.files[0];
@@ -48,15 +48,15 @@ export class ProfilePage {
     this.uploadPercent = task.percentageChanges();
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.profile.form.patchValue({
-            profilepicture: `users/${this.auth.auth.auth.currentUser.uid}/profile-picture/profile.jpg`
-          })
-          this.downloadURL.subscribe(url => (document.getElementById('img-preview') as any).src = url)
-          })
-     )
-    .subscribe()
+      finalize(() => {
+        this.downloadURL = fileRef.getDownloadURL();
+        this.profile.form.patchValue({
+          profilepicture: `users/${this.auth.auth.auth.currentUser.uid}/profile-picture/profile.jpg`
+        })
+        this.downloadURL.subscribe(url => (document.getElementById('img-preview') as any).src = url)
+      })
+    )
+      .subscribe()
   }
 
   uploadFile(base64: string): void {
@@ -72,22 +72,22 @@ export class ProfilePage {
     this.show = true;
     console.log('ref', ref);
     ref.putString(base64, 'base64', metadata)
-    .then(() => {
-      
-      this.profile.form.patchValue({
-        profilepicture: `users/${this.auth.auth.auth.currentUser.uid}/profile-picture/profile.jpg`
-      })
-      
-        
-      this.downloadURL = ref.getDownloadURL();
-      this.downloadURL.subscribe(url => this.ngZone.run(() => (document.getElementById('img-preview') as any).src = url))
+      .then(() => {
+
+        this.profile.form.patchValue({
+          profilepicture: `users/${this.auth.auth.auth.currentUser.uid}/profile-picture/profile.jpg`
+        })
+
+
+        this.downloadURL = ref.getDownloadURL();
+        this.downloadURL.subscribe(url => this.ngZone.run(() => (document.getElementById('img-preview') as any).src = url))
       })
       .catch(er => {
-       // this.img = false;
+        // this.img = false;
         console.log(er);
       });
-    
-    }
+
+  }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({

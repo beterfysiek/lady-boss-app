@@ -4,6 +4,7 @@ import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PushNotifService } from './services/push-notif.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +18,16 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private auth: AuthService,
     private fcm: PushNotifService,
-    public toastController: ToastController
+    public toastController: ToastController,
 
   ) {
     this.initializeApp();
   }
 
   private async presentToast(message) {
+    console.log('push message', message);
     const toast = await this.toastController.create({
       message,
       duration: 3000
