@@ -25,7 +25,6 @@ export class CreateAccountPage {
       .signInWithEmailAndPassword(this.email, this.pass)
       .then(succes => {
         this.presentToast('Signed in successful!');
-        this.router.navigateByUrl('/home')
       })
       .catch(err => this.presentToast('Oops, ' + err.message + ' Please try again.'));
   }

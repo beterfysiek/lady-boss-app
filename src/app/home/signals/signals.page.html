@@ -9,12 +9,12 @@
         <p>EURO/USD SELL</p>
         <p>TP {{s.TP}}</p>
         <p>SL {{s.SL}}</p>
-        <p slot="end" class="pos">Open {{s.open}} position</p>
+        <p slot="end" class="pos">{{s.open ? 'Open' : 'Closed'}} position</p>
         </ion-label>
       </ion-item>
     
     </ion-list>
-    <p text-center>Load More</p>
+    <p text-center (click)="loadmore()">Load More</p>
   </ion-content>
 
   <ion-footer>

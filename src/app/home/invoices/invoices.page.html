@@ -2,16 +2,16 @@
 
     <h2>Invoices</h2>
     <ion-list no-margin no-padding lines="none">
-      <ion-item margin-bottom *ngFor="let i of auth.invoices | async">
+      <ion-item margin-bottom *ngFor="let i of invoices | async">
         <ion-label>
-        <span slot="end" class="date">{{i.timestamp | date: 'short'}}</span>
-        <p>Payed at: {{i.payedat | date: 'short' }}</p>
-        <p>Payed untill:  {{i.payeduntill  | date: 'short'}}</p>
-        <p>Amount: {{i.amount}}$</p>
+        <span slot="end" class="date">{{i.paydate  | date: 'short'}}</span>
+        <p>Payed at: {{i.paydate | date: 'short' }}</p>
+        <p>Member until:  {{i.paydate | numberToDate: i.price | date: 'short'}}</p>
+        <p>Amount: {{i.price}}$</p>
         </ion-label>
       </ion-item>
     </ion-list>
-    <p text-center>Load More</p>
+    <p text-center (click)="loadmore()">Load More</p>
   </ion-content>
 
   <ion-footer>

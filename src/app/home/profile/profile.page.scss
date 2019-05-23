@@ -1,12 +1,22 @@
-ion-input {
-    border-bottom: 1px solid rgb(94, 20, 20);
-}
-img {
+
+ion-avatar {
     display: inline-block;
-    width: 50%;
-    border-radius: 50%;
+    height: 200px;
+    width: 200px;
 }
 .imgwrap {
     width:100%;
     text-align: center;
 }
+ion-input {
+    text-align: right
+}
+img {
+    background: url('../../../assets/loader.gif') no-repeat;
+    background-position: center; 
+    position: relative;
+  }
+  .profile {
+      margin-top: 10px;
+  }
+ 

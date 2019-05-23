@@ -1,24 +1,42 @@
 <ion-content padding>
-  <div class="imgwrap">
-    <ion-avatar *ngIf="show" class="profile" (click)="fileinput1.click()">
-      <img id="img-preview" class="fadeOnInit">
-    </ion-avatar>
-  <input #fileinput1 (change)="uploadFileBrowser($event)" type="file" accept="image/*" style="display: none">
-  <ion-button (click)="(platform.is('cordova')) ? presentActionSheet() : fileinput1.click()" expand="full" color="dark">
-    Upload image
-  </ion-button>
-</div>
 
-    <h2>Profile</h2>
-    <ion-input placeholder="Username:"></ion-input>
-    <ion-textarea placeholder="Bio:"></ion-textarea>
-    <ion-textarea placeholder="From:"></ion-textarea>
-  </ion-content>
-  
-  <ion-footer>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-button (click)="nav('/home')" color="light" fill="clear" slot="end">Back</ion-button>
-        </ion-buttons> 
-      </ion-toolbar>
-  </ion-footer>
+  <div class="imgwrap">
+    <ion-avatar *ngIf="profile.profileUrl" class="profile" (click)="fileinput1.click()">
+      <img [src]="profile.profileUrl | async" id="img-preview" class="fadeOnInit">
+    </ion-avatar>
+    {{profileUrl | async}}
+    <input #fileinput1 (change)="uploadFileBrowser($event)" type="file" accept="image/*" style="display: none">
+    <ion-button margin-top (click)="(platform.is('cordova')) ? presentActionSheet() : fileinput1.click()" expand="full"
+      color="dark">
+      Upload image
+    </ion-button>
+  </div>
+
+  <h2>Details</h2>
+  <form [formGroup]="profile.form">
+
+    <ion-item>
+      <ion-label style="color: lightgrey; font-size: 0.8em">Username</ion-label>
+      <ion-input formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label style="color: lightgrey; font-size: 0.8em" color="dark">Bio</ion-label>
+      <ion-input formControlName="bio"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label style="color: lightgrey; font-size: 0.8em" color="dark">From</ion-label>
+      <ion-input formControlName="from"></ion-input>
+    </ion-item>
+
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="nav('/home')" color="light" fill="clear" slot="end">Back</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -15,7 +15,8 @@ export class PushNotifService {
     private afs: AngularFirestore,
     private platform: Platform,
     private auth: AuthService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    ) { }
 
   async getToken() {
     let token;
@@ -28,45 +29,27 @@ export class PushNotifService {
       token = await this.firebase.getToken();
       await this.firebase.grantPermission();
     }
-    this.subscribeToTopic(token);
     this.saveToken(token);
     
   }
 
-  private saveToken(token) {
+  private saveToken(token): void {
     if (!token) return;
 
     const devicesRef = this.afs.collection('devices');
-
+    const authsub = this.auth.auth.authState.subscribe(state => {
     const data = {
       token,
-      userId: this.auth.currentUserId ? this.auth.currentUserId : null
+      userId: state.uid
     };
 
-    return devicesRef.doc(token).set(data);
+    devicesRef.doc(state.uid).set(data);
+    
+    authsub.unsubscribe();
+  });
   }
 
   onNotifications() {
     return this.firebase.onNotificationOpen();
-  }
-
-  subscribeToTopic(token) {
-    console.log('going to get subscribed to topic subscriber');
-    const topic = 'subscriber';
-    console.log('fetch(', 'https://iid.googleapis.com/iid/v1/'+token+'/rel/topics/'+topic);
-      fetch('https://iid.googleapis.com/iid/v1/'+token+'/rel/topics/'+topic, {
-        method: 'POST',
-        headers: new Headers({
-          'Authorization': 'key=AIzaSyD8eCLULMR09_jHANlZCvAsDplkvrsn2OY',
-          'Content-Type': 'application/json'
-        })
-      }).then(response => {
-        if (response.status < 200 || response.status >= 400) {
-          throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
-        }
-        console.log('Subscribed to "'+topic+'"');
-      }).catch(error => {
-        console.error('SOMETHING GOES WRONG', error);
-      })
   }
 }

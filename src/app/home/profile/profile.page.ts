@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Router } from '@angular/router';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,8 @@ export class ProfilePage {
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
   show: boolean;
+  profileUrl: Observable<string | null>;
+
 
   constructor(
     private storage: AngularFireStorage,
@@ -30,11 +33,32 @@ export class ProfilePage {
     public platform: Platform,
     private domSanitizer: DomSanitizer,
     private ngZone: NgZone,
-    private profile: ProfileService,
-    private router: Router
-  ) { }
+    public profile: ProfileService,
+    private router: Router,
+    private afs: AngularFirestore
+  ) { 
+        // used for knowing if form inputs need to be saved
+        this.profile.formIsDirty = false;
+        this.profile.form.valueChanges.subscribe(val =>{
+          console.log(val);
+          this.profile.formIsDirty = true;
+        } )
+
+    }
+
+    ngOnDestroy() {
+      // set form to clean on page leave
+      this.profile.formIsDirty = false;
+    }
+  
+
 
   nav(to: string) {
+    if(this.profile.formIsDirty === true) this.afs
+    .doc(`users/${this.auth.currentUserId}`)
+    .update(this.profile.form.value)
+    .then(suc=> this.presentToastWithOptions('Changes are saved successfuly'))
+    .catch(er => this.presentToastWithOptions('Something went wrong.. changes not saved'));
     this.router.navigateByUrl(to);
   }
 

@@ -41,4 +41,8 @@ export class ResetPage {
     toast.present();
   }
 
+  nav(to: string) {
+    this.router.navigateByUrl(to);
+  }
+
 }
